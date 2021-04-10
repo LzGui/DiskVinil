@@ -26,7 +26,7 @@ namespace DiskVinil.Services
 
         public bool AtualizarDisco(Disco novoDisco)
         {
-            _local.discos.Add(novoDisco);
+            _local.discos.Attach(novoDisco);
             _local.Entry(novoDisco).State = EntityState.Modified;
             _local.SaveChanges();
             return true;
