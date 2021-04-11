@@ -1,4 +1,5 @@
-﻿using DiskVinil.Entities;
+﻿using DiskVinil.Bordas.UseCase;
+using DiskVinil.Entities;
 using DiskVinil.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -11,11 +12,28 @@ namespace DiskVinil.Controllers
     {
         private readonly ILogger<DiscoController> _logger;
         private readonly IDiscoService _disco;
+        private readonly IAdicionarDiscoUseCase _adicionarDiscoUseCase;
+        private readonly IAtualizarDiscoUseCase _atualizarDiscoUseCase;
+        private readonly IRemoverDiscoUseCase _removerDiscoUseCase;
+        private readonly IRetornarDiscoPorIdUseCase _retornarDiscoPorIdUseCase;
+        private readonly IRetornarListaDeDiscoUseCase _retornarListaDeDiscoUseCase;
 
-        public DiscoController(ILogger<DiscoController> logger, IDiscoService disco)
+
+        public DiscoController(ILogger<DiscoController> logger, 
+            IDiscoService disco,
+            IAdicionarDiscoUseCase adicionarDiscoUseCase,
+            IAtualizarDiscoUseCase atualizarDiscoUseCase,
+            IRemoverDiscoUseCase removerDiscoUseCase,
+            IRetornarDiscoPorIdUseCase retornarDiscoPorIdUseCase,
+            IRetornarListaDeDiscoUseCase retornarListaDeDiscoUseCase)
         {
             _logger = logger;
             _disco = disco;
+            _adicionarDiscoUseCase = adicionarDiscoUseCase;
+            _atualizarDiscoUseCase = atualizarDiscoUseCase;
+            _removerDiscoUseCase = removerDiscoUseCase;
+            _retornarDiscoPorIdUseCase = retornarDiscoPorIdUseCase;
+            _retornarListaDeDiscoUseCase = retornarListaDeDiscoUseCase;
         }
 
         [HttpGet]

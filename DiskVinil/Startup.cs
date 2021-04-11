@@ -1,9 +1,13 @@
+using DiskVinil.Adapter;
+using DiskVinil.Bordas.Adapter;
+using DiskVinil.Bordas.Repositorios;
+using DiskVinil.Bordas.UseCase;
 using DiskVinil.Context;
+using DiskVinil.Repositorios;
 using DiskVinil.Services;
+using DiskVinil.UseCase;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +30,14 @@ namespace DiskVinil
             services.AddEntityFrameworkNpgsql().AddDbContext<LocalDbContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("urlDisk")));
 
             services.AddScoped<IDiscoService, DiscoService>();
+
+            services.AddScoped<IAdicionarDiscoUseCase, AdicionarDiscoUseCase>();
+            services.AddScoped<IAtualizarDiscoUseCase, AtualizarDiscoUseCase>();
+            services.AddScoped<IRemoverDiscoUseCase, RemoverDiscoUseCase>();
+            services.AddScoped<IRetornarListaDeDiscoUseCase, RetornarListaDeDiscoUseCase>();
+            services.AddScoped<IRetornarDiscoPorIdUseCase, RetornarDiscoPorIdUseCase>();
+            services.AddScoped<IRepositorioDisco, RepositorioDisco>();
+            services.AddScoped<IAdicionarDiscoAdapter, AdicionarDiscoAdapter>();
 
             services.AddControllers();
         }
